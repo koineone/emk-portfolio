@@ -1,0 +1,70 @@
+/* Smooth scrolling for anchor nav */
+html { scroll-behavior: smooth; }
+
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --radius: 0.5rem;
+}
+/* Brand palette based on logo */
+:root {
+  --brand-blue: #185AA5;
+  --brand-green: #1BA777;
+  --brand-orange: #DD7531;
+  --brand-red: #C7133B;
+}
+
+
+
+/* Light/Dark theme tokens */
+:root {
+  --background: #ffffff;
+  --foreground: #0a0a0a;
+}
+
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+/* Simple container utility for consistent width */
+.container {
+  width: 100%;
+  margin-left: auto;
+/* Provide some offset for in-page anchors */
+section[id] { scroll-margin-top: 84px; }
+
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1000px;
+  }
+}
+

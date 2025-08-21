@@ -1,0 +1,12 @@
+{
+  "name": "Erick Koine",
+  "short_name": "EK",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#185AA5",
+  "icons": [
+    { "src": "/emk-logo-light.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
+

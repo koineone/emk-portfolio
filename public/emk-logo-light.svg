@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="142" viewBox="0 0 300 142" role="img" aria-label="EMK logo">
+  <rect width="300" height="142" fill="none"/>
+  <!-- E (red) -->
+  <rect x="20" y="10" width="28" height="120" fill="#C7133B"/>
+  <rect x="20" y="30" width="90" height="16" fill="#C7133B"/>
+  <rect x="20" y="63" width="70" height="16" fill="#C7133B"/>
+  <rect x="20" y="96" width="90" height="16" fill="#C7133B"/>
+  <!-- M (green) block with notch and blue triangle on top -->
+  <rect x="130" y="58" width="70" height="72" fill="#1BA777"/>
+  <polygon points="165,95 130,58 200,58" fill="#ffffff"/>
+  <polygon points="165,18 140,58 190,58" fill="#185AA5"/>
+  <!-- K (orange) left-pointing triangle -->
+  <polygon points="280,20 230,71 280,122" fill="#DD7531"/>
+</svg>

@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden">
+    <section id="home" className="relative overflow-hidden">
       {/* Floating brand shapes inspired by logo */}
       <motion.div
         aria-hidden

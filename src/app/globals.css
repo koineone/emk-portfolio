@@ -54,13 +54,19 @@ body {
 .container {
   width: 100%;
   margin-left: auto;
-/* Provide some offset for in-page anchors */
-section[id] { scroll-margin-top: 84px; }
-
   margin-right: auto;
   padding-left: 1rem;
   padding-right: 1rem;
 }
+
+/* Provide some offset for in-page anchors */
+section[id] { scroll-margin-top: 84px; }
+
+/* Minimal nav aesthetics inspired by references */
+.nav-links { display: flex; gap: 1rem; align-items: center; }
+.nav-link { position: relative; font-size: 0.9rem; letter-spacing: 0.02em; opacity: 0.9; }
+.nav-link::before { content: "//"; margin-right: 0.5rem; color: color-mix(in oklab, var(--foreground) 60%, transparent); }
+.nav-link:hover { opacity: 1; }
 
 @media (min-width: 1024px) {
   .container {

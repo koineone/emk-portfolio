@@ -50,13 +50,12 @@ export default function RootLayout({
               <Link href="/" aria-label="Erick Koine">
                 <Logo size={28} />
               </Link>
-              <nav className="flex items-center gap-3 text-sm">
-                <a className="hover:opacity-80" href="#about">About</a>
-                <a className="hover:opacity-80" href="#portfolio">Portfolio</a>
-                <a className="hover:opacity-80" href="#skills">Skills</a>
-                <a className="hover:opacity-80" href="#contact">Contact</a>
-                <a className="hover:opacity-80" href="/blog">Blog</a>
-                <a className="hover:opacity-80" href="/Erick-Koine-Resume.pdf" download>Resume</a>
+              <nav className="nav-links text-sm">
+                <a className="nav-link" href="#home">home</a>
+                <a className="nav-link" href="#expertise">expertise</a>
+                <a className="nav-link" href="#work">work</a>
+                <a className="nav-link" href="#experience">experience</a>
+                <a className="nav-link" href="#contact">contact</a>
                 <ThemeToggle />
               </nav>
             </div>

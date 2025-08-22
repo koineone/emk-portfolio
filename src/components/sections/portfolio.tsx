@@ -64,7 +64,7 @@ export function PortfolioSection() {
   const visible = PROJECTS.filter((p) => active === "All" || p.tags.includes(active));
 
   return (
-    <section id="portfolio" className="container py-20">
+    <section id="work" className="container py-20">
       <div className="mb-6 flex flex-wrap gap-2">
         {TAGS.map((t) => (
           <button

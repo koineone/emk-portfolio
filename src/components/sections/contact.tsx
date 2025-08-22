@@ -100,11 +100,11 @@ export function ContactSection() {
       >
         <motion.div variants={itemVariants} className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-            Let's Build Something Great
+            Let&apos;s Build Something Great
           </h2>
           <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-            Got an idea? Let's make it happen. Whether you need design, development, or both, 
-            I'm here to bring your vision to life.
+            Got an idea? Let&apos;s make it happen. Whether you need design, development, or both,
+            I&apos;m here to bring your vision to life.
           </p>
         </motion.div>
 
@@ -265,7 +265,7 @@ export function ContactSection() {
               className="p-6 bg-gradient-to-br from-[color:var(--brand-blue)]/5 to-[color:var(--brand-green)]/5 rounded-lg border border-[color:var(--brand-blue)]/10"
             >
               <p className="text-sm text-foreground/70 italic">
-                "Ready to transform your ideas into reality? Let's collaborate and create something amazing together."
+                "                &quot;Ready to transform your ideas into reality? Let&apos;s collaborate and create something amazing together.&quot;"
               </p>
             </motion.div>
           </motion.div>

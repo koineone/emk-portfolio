@@ -1,22 +1,15 @@
 "use client";
 
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { motion, useMotionValue } from "framer-motion";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 export function Hero() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isHovered, setIsHovered] = useState(false);
-  
   // Mouse tracking for interactive split
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-  
-  // Smooth spring animations
-  const springConfig = { damping: 25, stiffness: 700 };
-  const x = useSpring(mouseX, springConfig);
-  const y = useSpring(mouseY, springConfig);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -89,8 +82,7 @@ export function Hero() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             className="space-y-6"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
+
           >
             <motion.div
               className="inline-block"
@@ -194,7 +186,7 @@ export function Hero() {
                 >
                   <span className="text-[color:var(--brand-green)]">name</span>
                   <span className="text-foreground/70">:</span>{" "}
-                  <span className="text-[color:var(--brand-red)]">'Erick Koine'</span>
+                  <span className="text-[color:var(--brand-red)]">&apos;Erick Koine&apos;</span>
                   <span className="text-foreground/70">,</span>
                 </motion.div>
                 
@@ -207,9 +199,9 @@ export function Hero() {
                   <span className="text-[color:var(--brand-green)]">skills</span>
                   <span className="text-foreground/70">:</span>{" "}
                   <span className="text-[color:var(--brand-orange)]">[</span>
-                  <span className="text-[color:var(--brand-red)]">'Next.js'</span>
+                  <span className="text-[color:var(--brand-red)]">&apos;Next.js&apos;</span>
                   <span className="text-foreground/70">,</span>{" "}
-                  <span className="text-[color:var(--brand-red)]">'Python'</span>
+                  <span className="text-[color:var(--brand-red)]">&apos;Python&apos;</span>
                   <span className="text-[color:var(--brand-orange)]">]</span>
                   <span className="text-foreground/70">,</span>
                 </motion.div>
@@ -222,7 +214,7 @@ export function Hero() {
                 >
                   <span className="text-[color:var(--brand-green)]">passion</span>
                   <span className="text-foreground/70">:</span>{" "}
-                  <span className="text-[color:var(--brand-red)]">'Building the future'</span>
+                  <span className="text-[color:var(--brand-red)]">&apos;Building the future&apos;</span>
                 </motion.div>
                 
                 <motion.div

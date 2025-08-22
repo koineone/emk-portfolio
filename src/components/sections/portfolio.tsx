@@ -83,24 +83,7 @@ const itemVariants = {
   }
 };
 
-const filterVariants = {
-  hidden: { opacity: 0, scale: 0.8 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      duration: 0.3,
-      ease: "easeOut"
-    }
-  },
-  exit: {
-    opacity: 0,
-    scale: 0.8,
-    transition: {
-      duration: 0.2
-    }
-  }
-};
+
 
 export function PortfolioSection() {
   const [active, setActive] = useState<Tag>("All");

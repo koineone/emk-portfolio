@@ -86,7 +86,7 @@ export function TestimonialsSection() {
             variants={itemVariants}
             className="text-lg text-foreground/70 max-w-2xl mx-auto"
           >
-            Don't just take my word for it. Here's what clients and colleagues have to say about working with me.
+            Don&apos;t just take my word for it. Here&apos;s what clients and colleagues have to say about working with me.
           </motion.p>
         </motion.div>
 
@@ -123,9 +123,9 @@ export function TestimonialsSection() {
 
                   {/* Quote */}
                   <blockquote className="text-foreground/80 mb-6 leading-relaxed">
-                    <span className="text-[color:var(--brand-blue)] text-2xl font-serif">"</span>
+                    <span className="text-[color:var(--brand-blue)] text-2xl font-serif">&ldquo;</span>
                     {testimonial.quote}
-                    <span className="text-[color:var(--brand-blue)] text-2xl font-serif">"</span>
+                    <span className="text-[color:var(--brand-blue)] text-2xl font-serif">&rdquo;</span>
                   </blockquote>
 
                   {/* Author Info */}
@@ -165,7 +165,7 @@ export function TestimonialsSection() {
               className="text-sm font-semibold text-[color:var(--brand-blue)] hover:text-[color:var(--brand-green)] transition-colors"
               whileHover={{ x: 5 }}
             >
-              Let's talk →
+              Let&apos;s talk →
             </motion.a>
           </motion.div>
         </motion.div>

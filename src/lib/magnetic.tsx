@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useMotionValue, useTransform } from "framer-motion";
+import { motion, useMotionValue } from "framer-motion";
 import { useRef } from "react";
 
 export function Magnetic({ children, strength = 0.3 }: { children: React.ReactNode; strength?: number }) {

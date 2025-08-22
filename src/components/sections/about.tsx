@@ -22,7 +22,7 @@ const itemVariants = {
     y: 0,
     transition: {
       duration: 0.6,
-      ease: "easeOut"
+      ease: [0.25, 0.1, 0.25, 1] as const
     }
   }
 };
@@ -76,7 +76,7 @@ export function AboutSection() {
             variants={itemVariants}
             className="mt-4 text-lg text-foreground/70 leading-relaxed"
           >
-            I'm Erick Koine, where technology meets creativity. With over 7 years of experience across finance, consulting,
+            I&apos;m Erick Koine, where technology meets creativity. With over 7 years of experience across finance, consulting,
             and education sectors, I bridge the gap between technical excellence and beautiful design.
           </motion.p>
 

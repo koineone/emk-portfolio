@@ -13,6 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 import { CustomCursor } from "@/components/custom-cursor";
 
@@ -45,19 +46,35 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-dvh`}
       >
         <ThemeProvider>
-          <header className="sticky top-0 z-50 border-b border-foreground/10 bg-background/60 backdrop-blur">
-            <div className="container flex h-14 items-center justify-between">
-              <Link href="/" aria-label="Erick Koine">
-                <Logo size={28} />
+          <header className="sticky top-0 z-50 border-b border-foreground/10 bg-background/80 backdrop-blur-md">
+            <div className="container flex h-16 items-center justify-between">
+              <Link href="/" aria-label="Erick Koine" className="hover:opacity-80 transition-opacity">
+                <Logo size={32} />
               </Link>
-              <nav className="nav-links text-sm">
-                <a className="nav-link" href="#home">home</a>
-                <a className="nav-link" href="#expertise">expertise</a>
-                <a className="nav-link" href="#work">work</a>
-                <a className="nav-link" href="#experience">experience</a>
-                <a className="nav-link" href="#contact">contact</a>
-                <ThemeToggle />
-              </nav>
+
+              <div className="flex items-center gap-6">
+                <nav className="hidden md:flex nav-links text-sm">
+                  <a className="nav-link hover:text-[color:var(--brand-blue)] transition-colors" href="#home">home</a>
+                  <a className="nav-link hover:text-[color:var(--brand-blue)] transition-colors" href="#about">about</a>
+                  <a className="nav-link hover:text-[color:var(--brand-blue)] transition-colors" href="#expertise">expertise</a>
+                  <a className="nav-link hover:text-[color:var(--brand-blue)] transition-colors" href="#work">work</a>
+                  <a className="nav-link hover:text-[color:var(--brand-blue)] transition-colors" href="#contact">contact</a>
+                </nav>
+
+                <div className="flex items-center gap-3">
+                  <Button
+                    asChild
+                    variant="outline"
+                    size="sm"
+                    className="hidden sm:inline-flex border-[color:var(--brand-green)] text-[color:var(--brand-green)] hover:bg-[color:var(--brand-green)] hover:text-white"
+                  >
+                    <a href="/resume.pdf" download>
+                      📄 Resume
+                    </a>
+                  </Button>
+                  <ThemeToggle />
+                </div>
+              </div>
             </div>
           </header>
           <PageTransition>

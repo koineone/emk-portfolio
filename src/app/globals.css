@@ -1,5 +1,18 @@
 /* Smooth scrolling for anchor nav */
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
 
 @import "tailwindcss";
 @import "tw-animate-css";
@@ -60,7 +73,32 @@ body {
 }
 
 /* Provide some offset for in-page anchors */
-section[id] { scroll-margin-top: 84px; }
+section[id] { scroll-margin-top: 100px; }
+
+/* Enhanced focus styles for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--brand-blue);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: color-mix(in oklab, var(--brand-blue) 30%, transparent);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in oklab, var(--brand-blue) 50%, transparent);
+}
 
 /* Minimal nav aesthetics inspired by references */
 .nav-links { display: flex; gap: 1rem; align-items: center; }

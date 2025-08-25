@@ -68,23 +68,26 @@ export function TestimonialsSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="testimonials" className="py-20 bg-gradient-to-b from-background to-foreground/5" ref={ref}>
-      <div className="container">
+    <section id="testimonials" className="relative py-20 overflow-hidden bg-gradient-to-b from-background to-foreground/5" ref={ref}>
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[color:var(--brand-green)]/5 via-transparent to-[color:var(--brand-blue)]/5" />
+
+      <div className="container relative z-10">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="text-center mb-16"
+          className="text-center mb-20 max-w-7xl mx-auto"
         >
-          <motion.h2 
+          <motion.h2
             variants={itemVariants}
-            className="text-3xl md:text-4xl font-bold tracking-tight mb-4"
+            className="text-4xl md:text-5xl font-bold tracking-tight mb-6"
           >
             What Clients Say
           </motion.h2>
-          <motion.p 
+          <motion.p
             variants={itemVariants}
-            className="text-lg text-foreground/70 max-w-2xl mx-auto"
+            className="text-xl text-foreground/70 max-w-3xl mx-auto"
           >
             Don&apos;t just take my word for it. Here&apos;s what clients and colleagues have to say about working with me.
           </motion.p>

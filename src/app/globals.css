@@ -100,11 +100,15 @@ section[id] { scroll-margin-top: 100px; }
   background: color-mix(in oklab, var(--brand-blue) 50%, transparent);
 }
 
-/* Minimal nav aesthetics inspired by references */
-.nav-links { display: flex; gap: 1rem; align-items: center; }
-.nav-link { position: relative; font-size: 0.9rem; letter-spacing: 0.02em; opacity: 0.9; }
-.nav-link::before { content: "//"; margin-right: 0.5rem; color: color-mix(in oklab, var(--foreground) 60%, transparent); }
-.nav-link:hover { opacity: 1; }
+/* Navigation styling */
+nav a {
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+nav a:hover {
+  transform: translateY(-1px);
+}
 
 @media (min-width: 1024px) {
   .container {

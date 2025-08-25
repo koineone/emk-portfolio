@@ -14,6 +14,7 @@ const geistMono = Geist_Mono({
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { Home, User, Briefcase, FolderOpen, Mail, Download, Sun, Moon } from "lucide-react";
 
 import { CustomCursor } from "@/components/custom-cursor";
 
@@ -46,19 +47,34 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-dvh`}
       >
         <ThemeProvider>
-          <header className="sticky top-0 z-50 border-b border-foreground/10 bg-background/80 backdrop-blur-md">
+          <header className="sticky top-0 z-50 border-b border-foreground/20 bg-background/95 backdrop-blur-md">
             <div className="container flex h-16 items-center justify-between">
               <Link href="/" aria-label="Erick Koine" className="hover:opacity-80 transition-opacity">
                 <Logo size={32} />
               </Link>
 
-              <div className="flex items-center gap-6">
-                <nav className="hidden md:flex nav-links text-sm">
-                  <a className="nav-link hover:text-[color:var(--brand-blue)] transition-colors" href="#home">home</a>
-                  <a className="nav-link hover:text-[color:var(--brand-blue)] transition-colors" href="#about">about</a>
-                  <a className="nav-link hover:text-[color:var(--brand-blue)] transition-colors" href="#expertise">expertise</a>
-                  <a className="nav-link hover:text-[color:var(--brand-blue)] transition-colors" href="#work">work</a>
-                  <a className="nav-link hover:text-[color:var(--brand-blue)] transition-colors" href="#contact">contact</a>
+              <div className="flex items-center gap-8">
+                <nav className="hidden md:flex items-center gap-6">
+                  <a className="flex items-center gap-2 text-sm text-foreground/70 hover:text-[color:var(--brand-blue)] transition-colors" href="#home">
+                    <Home className="h-4 w-4" />
+                    Home
+                  </a>
+                  <a className="flex items-center gap-2 text-sm text-foreground/70 hover:text-[color:var(--brand-blue)] transition-colors" href="#about">
+                    <User className="h-4 w-4" />
+                    About
+                  </a>
+                  <a className="flex items-center gap-2 text-sm text-foreground/70 hover:text-[color:var(--brand-blue)] transition-colors" href="#expertise">
+                    <Briefcase className="h-4 w-4" />
+                    Expertise
+                  </a>
+                  <a className="flex items-center gap-2 text-sm text-foreground/70 hover:text-[color:var(--brand-blue)] transition-colors" href="#work">
+                    <FolderOpen className="h-4 w-4" />
+                    Work
+                  </a>
+                  <a className="flex items-center gap-2 text-sm text-foreground/70 hover:text-[color:var(--brand-blue)] transition-colors" href="#contact">
+                    <Mail className="h-4 w-4" />
+                    Contact
+                  </a>
                 </nav>
 
                 <div className="flex items-center gap-3">
@@ -68,8 +84,9 @@ export default function RootLayout({
                     size="sm"
                     className="hidden sm:inline-flex border-[color:var(--brand-green)] text-[color:var(--brand-green)] hover:bg-[color:var(--brand-green)] hover:text-white"
                   >
-                    <a href="/resume.pdf" download>
-                      📄 Resume
+                    <a href="/resume.pdf" download className="flex items-center gap-2">
+                      <Download className="h-4 w-4" />
+                      Resume
                     </a>
                   </Button>
                   <ThemeToggle />

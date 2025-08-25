@@ -57,13 +57,17 @@ export function AboutSection() {
   const timelineInView = useInView(timelineRef, { once: true, margin: "-50px" });
 
   return (
-    <section id="about" className="container py-20" ref={ref}>
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
-        className="grid gap-10 md:grid-cols-[1fr_1px_1fr]"
-      >
+    <section id="about" className="relative py-20 overflow-hidden" ref={ref}>
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[color:var(--brand-orange)]/5 via-transparent to-[color:var(--brand-red)]/5" />
+
+      <div className="container relative z-10">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          className="grid gap-12 lg:grid-cols-[1fr_1px_1fr] max-w-7xl mx-auto"
+        >
         {/* Left: Intro + Facts */}
         <motion.div variants={itemVariants} className="max-w-xl">
           <motion.h2 
@@ -234,6 +238,7 @@ export function AboutSection() {
           </motion.ol>
         </motion.div>
       </motion.div>
+      </div>
     </section>
   );
 }

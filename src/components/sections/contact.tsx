@@ -91,22 +91,26 @@ export function ContactSection() {
   ];
 
   return (
-    <section id="contact" className="container py-20" ref={ref}>
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
-        className="max-w-6xl mx-auto"
-      >
-        <motion.div variants={itemVariants} className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-            Let&apos;s Build Something Great
-          </h2>
-          <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-            Got an idea? Let&apos;s make it happen. Whether you need design, development, or both,
-            I&apos;m here to bring your vision to life.
-          </p>
-        </motion.div>
+    <section id="contact" className="relative py-20 overflow-hidden" ref={ref}>
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[color:var(--brand-blue)]/5 via-[color:var(--brand-green)]/5 to-[color:var(--brand-orange)]/5" />
+
+      <div className="container relative z-10">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          className="max-w-7xl mx-auto"
+        >
+          <motion.div variants={itemVariants} className="text-center mb-20">
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
+              Let&apos;s Build Something Great
+            </h2>
+            <p className="text-xl text-foreground/70 max-w-3xl mx-auto">
+              Got an idea? Let&apos;s make it happen. Whether you need design, development, or both,
+              I&apos;m here to bring your vision to life.
+            </p>
+          </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           {/* Contact Form */}
@@ -270,7 +274,8 @@ export function ContactSection() {
             </motion.div>
           </motion.div>
         </div>
-      </motion.div>
+        </motion.div>
+      </div>
     </section>
   );
 }

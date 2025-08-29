@@ -35,10 +35,11 @@ html {
 }
 /* Brand palette based on logo */
 :root {
-  --brand-blue: #185AA5;
-  --brand-green: #1BA777;
-  --brand-orange: #DD7531;
-  --brand-red: #C7133B;
+  /* extracted from emk-logo-color.svg */
+  --brand-blue: #185AA5;   /* deep electric blue */
+  --brand-orange: #DD7531; /* warm orange */
+  --brand-green: #01A677;  /* vivid teal/green */
+  --brand-red: #C7133B;    /* strong magenta-red */
 }
 
 
@@ -91,6 +92,12 @@ section[id] { scroll-margin-top: 100px; }
   background: var(--background);
 }
 
+/* Preloader star pulse keyframes (avoid shorthand conflicts) */
+@keyframes emk-pulse {
+  0% { opacity: 0.35; transform: scale(1); }
+  100% { opacity: 0.9; transform: scale(1.25); }
+}
+
 ::-webkit-scrollbar-thumb {
   background: color-mix(in oklab, var(--brand-blue) 30%, transparent);
   border-radius: 4px;
@@ -108,6 +115,99 @@ nav a {
 
 nav a:hover {
   transform: translateY(-1px);
+}
+
+/* Enhanced button animations */
+button, .button {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button:hover, .button:hover {
+  transform: translateY(-1px);
+}
+
+button:active, .button:active {
+  transform: translateY(0);
+}
+
+/* Card hover effects */
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Smooth reveal animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Pulse animation for interactive elements */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.animate-pulse-subtle {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Gradient text animation */
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+}
+
+/* Enhanced focus states */
+.focus-ring:focus-visible {
+  outline: 2px solid var(--brand-blue);
+  outline-offset: 2px;
+  border-radius: 8px;
 }
 
 @media (min-width: 1024px) {

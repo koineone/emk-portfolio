@@ -91,9 +91,9 @@ export function ContactSection() {
   ];
 
   return (
-    <section id="contact" className="relative py-20 overflow-hidden" ref={ref}>
+    <section id="contact" className="relative py-32 overflow-hidden" ref={ref}>
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[color:var(--brand-blue)]/5 via-[color:var(--brand-green)]/5 to-[color:var(--brand-orange)]/5" />
+      <div className="absolute inset-0 bg-gradient-to-br from-[color:var(--brand-blue)]/3 via-[color:var(--brand-green)]/3 to-[color:var(--brand-orange)]/3" />
 
       <div className="container relative z-10">
         <motion.div
@@ -103,11 +103,11 @@ export function ContactSection() {
           className="max-w-7xl mx-auto"
         >
           <motion.div variants={itemVariants} className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
+            <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
               Let&apos;s Build Something Great
             </h2>
             <p className="text-xl text-foreground/70 max-w-3xl mx-auto">
-              Got an idea? Let&apos;s make it happen. Whether you need design, development, or both,
+              Got an idea? Let&apos;s make it happen. Whether you need design, development, or strategic guidance,
               I&apos;m here to bring your vision to life.
             </p>
           </motion.div>
@@ -115,9 +115,9 @@ export function ContactSection() {
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           {/* Contact Form */}
           <motion.div variants={itemVariants}>
-            <Card className="border-[color:var(--brand-blue)]/20">
+            <Card className="border-2 border-[color:var(--brand-blue)]/20 hover:border-[color:var(--brand-blue)]/30 transition-all duration-300 shadow-lg">
               <CardContent className="p-8">
-                <h3 className="text-xl font-semibold mb-6">Send me a message</h3>
+                <h3 className="text-2xl font-semibold mb-6 text-[color:var(--brand-blue)]">Send me a message</h3>
                 
                 <form onSubmit={onSubmit} className="space-y-6">
                   <motion.div
@@ -166,19 +166,25 @@ export function ContactSection() {
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                     transition={{ duration: 0.5, delay: 0.6 }}
                   >
-                    <Button 
-                      type="submit" 
+                    <Button
+                      type="submit"
                       disabled={isSubmitting}
-                      className="w-full bg-[color:var(--brand-blue)] hover:bg-[color:var(--brand-blue)]/90 text-white"
+                      className="w-full bg-[color:var(--brand-blue)] hover:bg-[color:var(--brand-blue)]/90 text-white py-6 text-lg font-medium rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                     >
                       {isSubmitting ? (
-                        <motion.div
-                          animate={{ rotate: 360 }}
-                          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                          className="w-4 h-4 border-2 border-white border-t-transparent rounded-full"
-                        />
+                        <div className="flex items-center gap-3">
+                          <motion.div
+                            animate={{ rotate: 360 }}
+                            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                            className="w-5 h-5 border-2 border-white border-t-transparent rounded-full"
+                          />
+                          Sending...
+                        </div>
                       ) : (
-                        "Send Message"
+                        <div className="flex items-center gap-2">
+                          <span>Send Message</span>
+                          <span>🚀</span>
+                        </div>
                       )}
                     </Button>
                   </motion.div>
@@ -266,10 +272,10 @@ export function ContactSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.8 }}
-              className="p-6 bg-gradient-to-br from-[color:var(--brand-blue)]/5 to-[color:var(--brand-green)]/5 rounded-lg border border-[color:var(--brand-blue)]/10"
+              className="p-6 bg-gradient-to-br from-[color:var(--brand-blue)]/5 to-[color:var(--brand-green)]/5 rounded-xl border border-[color:var(--brand-blue)]/10"
             >
-              <p className="text-sm text-foreground/70 italic">
-                "                &quot;Ready to transform your ideas into reality? Let&apos;s collaborate and create something amazing together.&quot;"
+              <p className="text-foreground/70 italic leading-relaxed">
+                &quot;Ready to transform your ideas into reality? Let&apos;s collaborate and create something amazing together.&quot;
               </p>
             </motion.div>
           </motion.div>

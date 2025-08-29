@@ -23,13 +23,14 @@ import { Logo } from "@/components/logo";
 import { Footer } from "@/components/footer";
 
 import { PageTransition } from "@/components/page-transition";
+import { Preloader } from "@/components/preloader";
 
 export const metadata: Metadata = {
   title: "Erick Koine — Designer • Developer • ICT Professional",
   description:
     "Portfolio of Erick Koine: ICT support, web development, design, and automation.",
   metadataBase: new URL("https://www.example.com"),
-  icons: { icon: "/emk-logo-light.svg" },
+  icons: { icon: "/emk-logo-color.svg" },
   manifest: "/manifest.webmanifest",
 };
 
@@ -47,14 +48,15 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-dvh`}
       >
         <ThemeProvider>
+          <Preloader />
           <header className="sticky top-0 z-50 border-b border-foreground/20 bg-background/95 backdrop-blur-md">
-            <div className="container flex h-16 items-center justify-between">
+            <div className="container px-4 sm:px-6 lg:px-8 flex h-20 items-center gap-6">
               <Link href="/" aria-label="Erick Koine" className="hover:opacity-80 transition-opacity">
-                <Logo size={32} />
+                <Logo height={48} className="translate-y-[1px]" />
               </Link>
 
-              <div className="flex items-center gap-8">
-                <nav className="hidden md:flex items-center gap-6">
+              <div className="contents">
+                <nav className="hidden md:flex items-center gap-6 pl-4">
                   <a className="flex items-center gap-2 text-sm text-foreground/70 hover:text-[color:var(--brand-blue)] transition-colors" href="#home">
                     <Home className="h-4 w-4" />
                     Home
@@ -77,7 +79,7 @@ export default function RootLayout({
                   </a>
                 </nav>
 
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 ml-auto">
                   <Button
                     asChild
                     variant="outline"

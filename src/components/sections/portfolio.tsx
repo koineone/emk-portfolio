@@ -203,7 +203,7 @@ export function PortfolioSection() {
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto"
+          className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mx-auto max-w-none"
         >
         <AnimatePresence mode="wait">
           {visible.map((p, index) => (

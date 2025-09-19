@@ -7,6 +7,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
+import { Code2, PenTool, Palette, TerminalSquare } from "lucide-react";
 // --------------------
 // Hero Data
 // --------------------
@@ -170,6 +171,42 @@ function FloatingElements() {
 }
 
 // --------------------
+// Subtle mouse-parallax background icons
+// --------------------
+function MouseParallaxIcons() {
+  const items = [
+    { Comp: Code2, style: { top: "10%", left: "8%" }, color: "var(--brand-blue)" },
+    { Comp: PenTool, style: { top: "18%", right: "10%" }, color: "var(--brand-orange)" },
+    { Comp: Palette, style: { bottom: "18%", left: "12%" }, color: "var(--brand-green)" },
+    { Comp: TerminalSquare, style: { bottom: "12%", right: "15%" }, color: "var(--brand-red)" },
+  ];
+
+  return (
+    <div className="pointer-events-none absolute inset-0 -z-10">
+      {items.map((it, idx) => {
+        const Icon = it.Comp as any;
+        return (
+          <Icon
+            key={idx}
+            className="absolute w-12 h-12 opacity-[0.06] dark:opacity-[0.08]"
+            style={{
+              ...it.style,
+              // small translate based on mouse position (set on section as CSS vars)
+              transform:
+                "translate3d(calc((var(--mx,50vw) - 50vw) * 0.02), calc((var(--my,50vh) - 50vh) * 0.02), 0)",
+              color: it.color,
+              filter: "blur(0.3px)",
+            }}
+            aria-hidden
+          />
+        );
+      })}
+    </div>
+  );
+}
+
+
+// --------------------
 // Code Terminal Component
 // --------------------
 function CodeTerminal() {
@@ -278,8 +315,9 @@ function HeroSection() {
       <WatermarkEMK />
       <FloatingElements />
 
+      <MouseParallaxIcons />
       {/* Main Content Container */}
-      <div className="container mx-auto max-w-7xl px-6 lg:px-12 min-h-[calc(100dvh-5rem)] flex items-center justify-center z-10">
+      <div className="container mx-auto max-w-none px-6 lg:px-12 min-h-[calc(100dvh-5rem)] flex items-center justify-center z-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center w-full">
 
           {/* Left Side - Main Content */}
@@ -352,6 +390,7 @@ function HeroSection() {
                 transition={{ duration: 0.8, delay: 0.3 }}
                 className="text-xl lg:text-2xl text-foreground/80 leading-relaxed max-w-2xl mx-auto"
               >
+
                 I bring insight into key business issues, the technical skill to engineer solutions, and the confidence to act—refined through 7+ years of solving real problems.
               </motion.p>
             </motion.div>
@@ -390,6 +429,23 @@ function HeroSection() {
                 <Link href="#contact" aria-label="Get in touch">Get in Touch</Link>
               </Button>
             </motion.div>
+
+            {/* Social proof strip */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="pt-2"
+            >
+              <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-foreground/60">
+                <span className="uppercase tracking-wider text-foreground/40">Trusted by</span>
+                <span className="opacity-80">Dry Associates</span>
+                <span className="opacity-80">Cerny Bureau</span>
+                <span className="opacity-80">Crypsense</span>
+                <span className="opacity-80">Salma Samu</span>
+              </div>
+            </motion.div>
+
           </div>
 
           {/* Right Side - Portrait + Code Terminal overlay */}

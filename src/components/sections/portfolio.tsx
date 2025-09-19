@@ -134,8 +134,7 @@ const itemVariants = {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.6,
-      ease: "easeOut"
+      duration: 0.6
     }
   }
 };
@@ -203,7 +202,7 @@ export function PortfolioSection() {
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mx-auto max-w-none"
+          className="grid grid-cols-1 md:grid-cols-2 gap-10 mx-auto max-w-none"
         >
         <AnimatePresence mode="wait">
           {visible.map((p, index) => (
@@ -215,7 +214,7 @@ export function PortfolioSection() {
               exit="exit"
               layout
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className={p.featured ? "md:col-span-2 lg:col-span-2" : ""}
+              className=""
             >
               <Dialog>
                 <DialogTrigger asChild>
@@ -227,7 +226,7 @@ export function PortfolioSection() {
                     <Card className="overflow-hidden border-2 border-foreground/10 hover:border-[color:var(--brand-blue)]/30 transition-all duration-500 hover:shadow-2xl h-full">
                       <div className="relative overflow-hidden">
                         {p.images && p.images.length > 0 ? (
-                          <div className={`relative overflow-hidden ${p.featured ? 'aspect-[16/9]' : 'aspect-[4/3]'}`}>
+                          <div className={`relative overflow-hidden aspect-[16/9]`}>
                             <Image
                               src={p.images[0]}
                               alt={p.title}
@@ -255,7 +254,7 @@ export function PortfolioSection() {
                             )}
                           </div>
                         ) : (
-                          <div className={`bg-gradient-to-br from-[color:var(--brand-blue)]/10 to-[color:var(--brand-green)]/10 flex items-center justify-center ${p.featured ? 'aspect-[16/9]' : 'aspect-[4/3]'}`}>
+                          <div className={`bg-gradient-to-br from-[color:var(--brand-blue)]/10 to-[color:var(--brand-green)]/10 flex items-center justify-center aspect-[16/9]`}>
                             <span className="text-4xl opacity-50">🚀</span>
                           </div>
                         )}
@@ -323,7 +322,7 @@ export function PortfolioSection() {
                     </Card>
                   </motion.div>
                 </DialogTrigger>
-                <DialogContent className="w-full max-w-6xl max-h-[80vh] overflow-y-auto p-6 rounded-xl">
+                <DialogContent className="w-[95vw] max-w-[1400px] max-h-[85vh] overflow-y-auto p-6 rounded-xl">
                   <DialogHeader>
                     <DialogTitle className="text-2xl font-bold text-[color:var(--brand-blue)] mb-4">
                       {p.title}

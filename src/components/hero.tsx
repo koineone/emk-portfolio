@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
-import { Logo } from "@/components/logo";
+import { Badge } from "@/components/ui/badge";
 
 // --------------------
 // Hero Data
@@ -95,7 +95,7 @@ function HeroPortrait() {
       {/* Portrait */}
       {!imgError && (
         <Image
-          src="/erick-photo.jpg"
+          src="/erick.png"
           alt="Portrait of Erick Koine"
           fill
           sizes="(min-width: 1024px) 28rem, 22rem"
@@ -327,11 +327,29 @@ function HeroSection() {
                 </AnimatePresence>
               </div>
 
+              {/* Roles */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="flex flex-wrap gap-2"
+              >
+                {roles.map((r, i) => (
+                  <Badge
+                    key={r}
+                    variant="outline"
+                    className={`${["text-[color:var(--brand-blue)] border-[color:var(--brand-blue)]/40 bg-[color:var(--brand-blue)]/5","text-[color:var(--brand-green)] border-[color:var(--brand-green)]/40 bg-[color:var(--brand-green)]/5","text-[color:var(--brand-orange)] border-[color:var(--brand-orange)]/40 bg-[color:var(--brand-orange)]/5","text-[color:var(--brand-red)] border-[color:var(--brand-red)]/40 bg-[color:var(--brand-red)]/5"][i % 4]}`}
+                  >
+                    {r}
+                  </Badge>
+                ))}
+              </motion.div>
+
               {/* Subheadline */}
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
                 className="text-xl lg:text-2xl text-foreground/80 leading-relaxed max-w-2xl mx-auto"
               >
                 I bring insight into key business issues, the technical skill to engineer solutions, and the confidence to act—refined through 7+ years of solving real problems.
@@ -360,7 +378,7 @@ function HeroSection() {
                 size="lg"
                 className="bg-white text-gray-950 hover:bg-gray-100 px-8 py-6 text-base font-medium rounded-none transition-all duration-300"
               >
-                <Link href="#work">See My Work</Link>
+                <Link href="#work" aria-label="See my work">See My Work</Link>
               </Button>
 
               <Button
@@ -369,7 +387,7 @@ function HeroSection() {
                 size="lg"
                 className="border-2 border-[color:var(--brand-green)] text-[color:var(--brand-green)] hover:bg-[color:var(--brand-green)] hover:text-gray-950 px-8 py-6 text-base font-medium rounded-none transition-all duration-300"
               >
-                <Link href="#contact">Get in Touch</Link>
+                <Link href="#contact" aria-label="Get in touch">Get in Touch</Link>
               </Button>
             </motion.div>
           </div>

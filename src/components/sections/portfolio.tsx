@@ -322,7 +322,7 @@ export function PortfolioSection() {
                     </Card>
                   </motion.div>
                 </DialogTrigger>
-                <DialogContent className="w-[95vw] max-w-[1400px] max-h-[85vh] overflow-y-auto p-6 rounded-xl">
+                <DialogContent className="w-[98vw] sm:max-w-[98vw] lg:max-w-[1600px] xl:max-w-[1800px] max-h-[90vh] overflow-y-auto p-4 md:p-6 rounded-xl">
                   <DialogHeader>
                     <DialogTitle className="text-2xl font-bold text-[color:var(--brand-blue)] mb-4">
                       {p.title}

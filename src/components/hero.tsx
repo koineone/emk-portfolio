@@ -88,7 +88,7 @@ function HeroPortrait() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.2 }}
-      className="relative w-[22rem] h-[28rem] md:w-[24rem] md:h-[30rem] lg:w-[28rem] lg:h-[34rem] rounded-2xl overflow-hidden ring-1 ring-white/10 bg-white/5 backdrop-blur-sm shadow-xl"
+      className="relative w-[18rem] h-[24rem] md:w-[22rem] md:h-[28rem] lg:w-[28rem] lg:h-[34rem] rounded-2xl overflow-hidden ring-1 ring-white/10 bg-white/5 backdrop-blur-sm shadow-xl"
     >
       {/* Brand gradient backdrop (shows even if image is missing) */}
       <div className="absolute inset-0 bg-gradient-to-br from-[color:var(--brand-blue)]/20 via-transparent to-[color:var(--brand-green)]/20" />
@@ -227,7 +227,7 @@ function CodeTerminal() {
       className="relative"
     >
       {/* Terminal Window */}
-      <div className="bg-black/60 backdrop-blur-sm border border-white/10 rounded-lg p-6 font-mono text-sm max-w-lg">
+      <div className="bg-black/60 backdrop-blur-sm border border-white/10 rounded-lg p-6 font-mono text-xs sm:text-sm max-w-lg">
         {/* Terminal Header */}
         <div className="flex items-center gap-2 mb-4 pb-3 border-b border-gray-700/50">
           <div className="flex gap-1.5">
@@ -315,22 +315,32 @@ function HeroSection() {
       <WatermarkEMK />
       <FloatingElements />
 
-      <MouseParallaxIcons />
+      <div className="hidden sm:block"><MouseParallaxIcons /></div>
       {/* Main Content Container */}
-      <div className="container mx-auto max-w-none px-6 lg:px-12 min-h-[calc(100dvh-5rem)] flex items-center justify-center z-10">
+      <div className="container px-4 sm:px-6 lg:px-8 min-h-[calc(100dvh-5rem)] flex items-center justify-center z-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center w-full">
 
           {/* Left Side - Main Content */}
-          <div className="space-y-8">
+          <div className="space-y-6 md:space-y-8 text-left">
+            {/* Name Heading (left-aligned) */}
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7 }}
+              className="text-3xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[0.9]"
+            >
+              Erick Koine
+            </motion.h1>
+
             {/* Small Label */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="flex items-center gap-3"
+              className="flex items-center gap-3 justify-start"
             >
               <div className="w-8 h-px bg-[color:var(--brand-orange)]"></div>
-              <span className="text-[color:var(--brand-orange)] text-sm font-medium tracking-wider uppercase">
+              <span className="text-[color:var(--brand-orange)] text-xs sm:text-sm font-medium tracking-wider uppercase">
                 Full-Stack Developer with Business Acumen & Creative Edge
               </span>
             </motion.div>
@@ -350,7 +360,7 @@ function HeroSection() {
                     animate={{ y: 0, opacity: 1 }}
                     exit={{ y: -40, opacity: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="text-6xl md:text-7xl lg:text-8xl font-extrabold leading-tight tracking-tight"
+                    className="text-4xl md:text-7xl lg:text-8xl font-extrabold leading-tight tracking-tight"
                   >
                     <span className="bg-gradient-to-r from-[color:var(--brand-green)] to-[color:var(--brand-blue)] bg-clip-text text-transparent">
                       {typedWords[typedIndex]}
@@ -370,7 +380,7 @@ function HeroSection() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="flex flex-wrap gap-2"
+                className="flex flex-wrap gap-2 justify-start"
               >
                 {roles.map((r, i) => (
                   <Badge
@@ -388,7 +398,7 @@ function HeroSection() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                className="text-xl lg:text-2xl text-foreground/80 leading-relaxed max-w-2xl mx-auto"
+                className="text-base sm:text-lg lg:text-2xl text-foreground/80 leading-relaxed max-w-2xl"
               >
 
                 I bring insight into key business issues, the technical skill to engineer solutions, and the confidence to act—refined through 7+ years of solving real problems.
@@ -400,7 +410,7 @@ function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="text-lg lg:text-xl text-gray-300 leading-relaxed max-w-lg"
+              className="text-base sm:text-lg lg:text-xl text-gray-300 leading-relaxed max-w-prose"
             >
               Backend, frontend, and infrastructure — delivering technology that accelerates business outcomes
             </motion.p>
@@ -410,12 +420,12 @@ function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="flex flex-col sm:flex-row gap-4 pt-4"
+              className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4 justify-start"
             >
               <Button
                 asChild
                 size="lg"
-                className="bg-white text-gray-950 hover:bg-gray-100 px-8 py-6 text-base font-medium rounded-none transition-all duration-300"
+                className="bg-white text-gray-950 hover:bg-gray-100 px-6 py-4 text-sm sm:px-8 sm:py-6 sm:text-base font-medium rounded-none transition-all duration-300"
               >
                 <Link href="#work" aria-label="See my work">See My Work</Link>
               </Button>
@@ -424,7 +434,7 @@ function HeroSection() {
                 asChild
                 variant="outline"
                 size="lg"
-                className="border-2 border-[color:var(--brand-green)] text-[color:var(--brand-green)] hover:bg-[color:var(--brand-green)] hover:text-gray-950 px-8 py-6 text-base font-medium rounded-none transition-all duration-300"
+                className="border-2 border-[color:var(--brand-green)] text-[color:var(--brand-green)] hover:bg-[color:var(--brand-green)] hover:text-gray-950 px-6 py-4 text-sm sm:px-8 sm:py-6 sm:text-base font-medium rounded-none transition-all duration-300"
               >
                 <Link href="#contact" aria-label="Get in touch">Get in Touch</Link>
               </Button>
@@ -437,7 +447,7 @@ function HeroSection() {
               transition={{ duration: 0.6, delay: 0.6 }}
               className="pt-2"
             >
-              <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-foreground/60">
+              <div className="flex flex-wrap items-center justify-start gap-x-6 gap-y-2 text-xs sm:text-sm text-foreground/60">
                 <span className="uppercase tracking-wider text-foreground/40">Trusted by</span>
                 <span className="opacity-80">Dry Associates</span>
                 <span className="opacity-80">Cerny Bureau</span>
@@ -453,7 +463,7 @@ function HeroSection() {
             <motion.div style={{ y: portraitY }} className="max-w-full">
               <HeroPortrait />
             </motion.div>
-            <motion.div className="absolute -bottom-10 -right-10 z-10 max-w-[90vw]" style={{ y: terminalY }}>
+            <motion.div className="static mt-4 sm:absolute sm:bottom-2 sm:right-2 lg:-bottom-24 lg:-right-16 z-10 max-w-[90vw]" style={{ y: terminalY }}>
               <CodeTerminal />
             </motion.div>
           </div>

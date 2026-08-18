@@ -6,7 +6,9 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "save": "powershell -ExecutionPolicy Bypass -File scripts/save.ps1",
+    "live": "powershell -ExecutionPolicy Bypass -File scripts/live.ps1"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.1",

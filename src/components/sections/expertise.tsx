@@ -1,234 +1,120 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useState } from "react";
+import { Code2, Cloud, PenTool } from "lucide-react";
+import { Reveal, SectionHeading } from "@/components/reveal";
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2
-    }
-  }
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6
-    }
-  }
-};
-
-const skillVariants = {
-  hidden: { opacity: 0, scale: 0.8 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      duration: 0.5
-    }
-  }
-};
+const disciplines = [
+  {
+    id: "engineering",
+    title: "Engineering",
+    icon: Code2,
+    description: "Digital systems from backend architecture to frontend experiences.",
+    skills: ["Python", "Django", "Next.js", "React", "TypeScript", "PostgreSQL", "MySQL", "REST APIs"],
+  },
+  {
+    id: "infrastructure",
+    title: "Infrastructure",
+    icon: Cloud,
+    description: "Reliable business IT — networks, cloud, automation and uptime.",
+    skills: ["Microsoft 365", "Azure", "Linux", "Networking", "PowerShell", "Veeam", "Zabbix", "Security"],
+  },
+  {
+    id: "creative",
+    title: "Creative",
+    icon: PenTool,
+    description: "Brand identities and digital experiences built to communicate.",
+    skills: ["UI/UX", "Adobe Creative Suite", "Brand Identity", "Web Design", "Print", "Prototyping"],
+  },
+];
 
 export function ExpertiseSection() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
-  const skillCategories = {
-    "Tech Skills": {
-      icon: "💻",
-      color: "var(--brand-blue)",
-      skills: [
-        { name: "Next.js & React", level: 90, icon: "⚛️" },
-        { name: "Python & Django", level: 88, icon: "🐍" },
-        { name: "TypeScript & JavaScript", level: 85, icon: "📜" },
-        { name: "Cloud Infrastructure (Azure, AWS)", level: 82, icon: "☁️" },
-        { name: "Database Design (PostgreSQL, MySQL)", level: 80, icon: "🗃️" },
-        { name: "DevOps & Automation", level: 85, icon: "🤖" },
-        { name: "System Administration", level: 92, icon: "🖥️" },
-        { name: "Network Security", level: 88, icon: "🛡️" }
-      ]
-    },
-    "Design Skills": {
-      icon: "🎨",
-      color: "var(--brand-green)",
-      skills: [
-        { name: "UI/UX Design", level: 88, icon: "🖌️" },
-        { name: "Adobe Creative Suite", level: 90, icon: "🎭" },
-        { name: "Brand Identity Design", level: 85, icon: "🏷️" },
-        { name: "Web Design", level: 87, icon: "🌐" },
-        { name: "Print Design", level: 82, icon: "📄" },
-        { name: "Digital Marketing Materials", level: 85, icon: "📱" },
-        { name: "Prototyping & Wireframing", level: 80, icon: "📐" },
-        { name: "Design Systems", level: 83, icon: "🧩" }
-      ]
-    },
-    "Soft Skills": {
-      icon: "🤝",
-      color: "var(--brand-orange)",
-      skills: [
-        { name: "Problem Solving", level: 95, icon: "🔍" },
-        { name: "Project Management", level: 90, icon: "📊" },
-        { name: "Team Leadership", level: 87, icon: "👥" },
-        { name: "Client Communication", level: 92, icon: "💬" },
-        { name: "Strategic Thinking", level: 88, icon: "🎯" },
-        { name: "Creative Innovation", level: 90, icon: "💡" },
-        { name: "Adaptability", level: 93, icon: "🔄" },
-        { name: "Mentoring & Training", level: 85, icon: "🎓" }
-      ]
-    }
-  };
+  const [active, setActive] = useState(disciplines[0].id);
+  const current = disciplines.find((d) => d.id === active) ?? disciplines[0];
 
   return (
-    <section id="expertise" className="relative py-32 overflow-hidden" ref={ref}>
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[color:var(--brand-green)]/3 via-transparent to-[color:var(--brand-blue)]/3" />
+    <section id="expertise" className="relative py-20 sm:py-24 lg:py-32">
+      <div className="container">
+        <SectionHeading
+          eyebrow="What I do"
+          title="Three disciplines. One way of working."
+          description="I sit at the intersection of software, infrastructure and design — so the work doesn't stall between teams."
+        />
 
-      <div className="container relative z-10">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="text-center mb-20"
-        >
-          <motion.h2
-            variants={itemVariants}
-            className="text-4xl md:text-6xl font-bold tracking-tight mb-6"
-          >
-            Skills & Expertise
-          </motion.h2>
-          <motion.p
-            variants={itemVariants}
-            className="text-xl text-foreground/70 max-w-3xl mx-auto"
-          >
-            A unique blend of technical mastery, creative vision, and strategic thinking that drives exceptional results.
-          </motion.p>
-        </motion.div>
+        <Reveal className="mt-10 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-foreground/12 bg-foreground/10 sm:grid-cols-3">
+          {[
+            { step: "01", title: "Diagnose", body: "Find the bottleneck — process, system, or brand." },
+            { step: "02", title: "Design", body: "Shape the simplest thing that will actually get used." },
+            { step: "03", title: "Deliver", body: "Ship, measure, and leave it running without you." },
+          ].map((item) => (
+            <div key={item.step} className="bg-background px-5 py-5 sm:p-6">
+              <p className="font-mono text-[11px] text-[color:var(--accent)]">{item.step}</p>
+              <h3 className="mt-2 font-display text-xl font-semibold tracking-tight">{item.title}</h3>
+              <p className="mt-1.5 text-sm leading-relaxed text-[color:var(--muted-foreground)]">{item.body}</p>
+            </div>
+          ))}
+        </Reveal>
 
-        {/* Three-category grid layout */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto"
-        >
-        {Object.entries(skillCategories).map(([categoryName, categoryData], categoryIndex) => {
-
-          return (
-            <motion.div
-              key={categoryName}
-              variants={itemVariants}
-              className="relative group"
-              whileHover={{ y: -5 }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            >
-              {/* Glow effect */}
-              <div
-                className="absolute -inset-1 rounded-2xl blur opacity-20 group-hover:opacity-30 transition-opacity duration-300"
-                style={{
-                  background: `linear-gradient(135deg, ${categoryData.color}40, ${categoryData.color}20)`
-                }}
-              />
-
-              <Card
-                className="relative z-10 transition-all duration-300 h-full border-2 hover:shadow-xl"
-                style={{
-                  borderColor: `${categoryData.color}30`,
-                }}
+        {/* Mobile: tabs + pills */}
+        <div className="mt-12 md:hidden">
+          <div className="-mx-5 flex gap-2 overflow-x-auto px-5 no-scrollbar">
+            {disciplines.map((d) => (
+              <button
+                key={d.id}
+                type="button"
+                onClick={() => setActive(d.id)}
+                className={`h-11 shrink-0 rounded-full px-5 text-sm font-medium transition-colors ${
+                  active === d.id
+                    ? "bg-foreground text-background"
+                    : "border border-foreground/12 text-foreground/65"
+                }`}
               >
-                <CardHeader className="text-center pb-6">
-                  <motion.div
-                    className="mx-auto w-16 h-16 rounded-2xl flex items-center justify-center text-2xl mb-4 shadow-lg"
-                    style={{
-                      background: `linear-gradient(135deg, ${categoryData.color}20, ${categoryData.color}10)`
-                    }}
-                    whileHover={{ scale: 1.1, rotate: categoryIndex % 2 === 0 ? 5 : -5 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                  >
-                    {categoryData.icon}
-                  </motion.div>
-                  <CardTitle
-                    className="text-xl font-bold leading-tight"
-                    style={{ color: categoryData.color }}
-                  >
-                    {categoryName}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {categoryData.skills.map((skill, index) => (
-                    <motion.div
-                      key={skill.name}
-                      variants={skillVariants}
-                      custom={index}
-                      className="space-y-2"
-                    >
-                      <div className="flex items-center justify-between">
-                        <span className="flex items-center gap-3 text-sm font-medium">
-                          <span className="text-lg">{skill.icon}</span>
-                          <span className="leading-tight">{skill.name}</span>
-                        </span>
-                        <span className="text-xs text-foreground/60 font-mono bg-foreground/5 px-2 py-1 rounded">
-                          {skill.level}%
-                        </span>
-                      </div>
-                      <div className="h-2 bg-foreground/10 rounded-full overflow-hidden">
-                        <motion.div
-                          className="h-full rounded-full"
-                          style={{
-                            background: `linear-gradient(90deg, ${categoryData.color}, ${categoryData.color}80)`
-                          }}
-                          initial={{ width: 0 }}
-                          animate={isInView ? { width: `${skill.level}%` } : { width: 0 }}
-                          transition={{ duration: 1.2, delay: (categoryIndex * 0.3) + (index * 0.1) + 0.5 }}
-                        />
-                      </div>
-                    </motion.div>
-                  ))}
-                </CardContent>
-              </Card>
-            </motion.div>
-          );
-        })}
-      </motion.div>
+                {d.title}
+              </button>
+            ))}
+          </div>
+          <div className="mt-8">
+            <p className="text-[15px] leading-relaxed text-foreground/65">{current.description}</p>
+            <div className="mt-5 flex flex-wrap gap-2">
+              {current.skills.map((skill) => (
+                <span
+                  key={skill}
+                  className="rounded-full border border-foreground/10 bg-foreground/[0.03] px-3.5 py-2 text-sm text-foreground/75"
+                >
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
 
-      {/* Bottom CTA */}
-      <motion.div
-        variants={itemVariants}
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
-        className="text-center mt-20"
-      >
-        <motion.p
-          variants={itemVariants}
-          className="text-lg text-foreground/70 mb-4"
-        >
-          Ready to bring your vision to life with both creative flair and technical excellence?
-        </motion.p>
-        <motion.div
-          variants={itemVariants}
-          className="flex justify-center gap-4 text-sm text-foreground/50"
-        >
-          <span className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[color:var(--brand-blue)]"></span>
-            Technical Mastery
-          </span>
-          <span className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[color:var(--brand-green)]"></span>
-            Creative Vision
-          </span>
-          <span className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[color:var(--brand-orange)]"></span>
-            Strategic Impact
-          </span>
-        </motion.div>
-        </motion.div>
+        {/* Desktop: three cards */}
+        <div className="mt-14 hidden gap-6 md:grid md:grid-cols-3">
+          {disciplines.map((d, i) => {
+            const Icon = d.icon;
+            return (
+              <Reveal key={d.id} delay={i * 0.08}>
+                <article className="h-full rounded-[1.5rem] border border-foreground/10 p-7">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[color:var(--accent)]/10 text-[color:var(--accent)]">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <h3 className="mt-6 font-display text-2xl font-semibold tracking-tight">{d.title}</h3>
+                  <p className="mt-3 text-[15px] leading-relaxed text-foreground/60">{d.description}</p>
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    {d.skills.map((skill) => (
+                      <span
+                        key={skill}
+                        className="rounded-full border border-foreground/10 px-3 py-1.5 text-xs text-foreground/65"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </article>
+              </Reveal>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

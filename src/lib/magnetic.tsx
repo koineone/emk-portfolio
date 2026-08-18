@@ -1,14 +1,22 @@
 "use client";
 
 import { motion, useMotionValue } from "framer-motion";
-import { useRef } from "react";
+import { useRef, type MouseEvent, type ReactNode } from "react";
 
-export function Magnetic({ children, strength = 0.3 }: { children: React.ReactNode; strength?: number }) {
+export function Magnetic({
+  children,
+  strength = 0.3,
+  className,
+}: {
+  children: ReactNode;
+  strength?: number;
+  className?: string;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  function onMouseMove(e: React.MouseEvent) {
+  function onMouseMove(e: MouseEvent) {
     const el = ref.current;
     if (!el) return;
     const rect = el.getBoundingClientRect();
@@ -24,7 +32,13 @@ export function Magnetic({ children, strength = 0.3 }: { children: React.ReactNo
   }
 
   return (
-    <motion.div ref={ref} style={{ x, y }} onMouseMove={onMouseMove} onMouseLeave={onMouseLeave}>
+    <motion.div
+      ref={ref}
+      style={{ x, y }}
+      className={className}
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
+    >
       {children}
     </motion.div>
   );

@@ -1,492 +1,186 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+
+import { useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
+import { NairobiTime } from "@/components/nairobi-time";
+import { Magnetic } from "@/lib/magnetic";
 
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-
-import { Code2, PenTool, Palette, TerminalSquare } from "lucide-react";
-// --------------------
-// Hero Data
-// --------------------
-const roles = ["Developer", "Designer", "System Admin", "Strategist"];
-const typedWords = ["Code.", "Design.", "Impact."];
-
-const codeLines = [
-  `const developer = {`,
-  `  name: "Erick Koine",`,
-  `  skills: ["Next.js", "TypeScript", "Design"],`,
-  `  passion: "Building the future",`,
-  `  available: true`,
-  `};`,
+const roles = ["Developer", "Designer", "Systems"];
+const stack = [
+  "Python",
+  "Django",
+  "Next.js",
+  "TypeScript",
+  "PostgreSQL",
+  "Azure",
+  "Infrastructure",
+  "Brand Design",
 ];
 
-// --------------------
-// Background FX (radial glows + vignette)
-// --------------------
-function BackgroundFX() {
-  return (
-    <>
-      {/* Radial glows — brand tinted */}
-      <div className="pointer-events-none absolute -top-40 -left-40 h-[55vh] w-[55vh] rounded-full bg-[color:var(--brand-green)]/12 blur-3xl" />
-      <div className="pointer-events-none absolute -top-20 right-[-10%] h-[60vh] w-[60vh] rounded-full bg-[color:var(--brand-blue)]/12 blur-3xl" />
-      <div className="pointer-events-none absolute bottom-[-10%] left-1/3 h-[40vh] w-[40vh] rounded-full bg-[color:var(--brand-green)]/10 blur-[80px]" />
+function HeroPortrait() {
+  const [imgError, setImgError] = useState(false);
 
-      {/* Vignette */}
+  return (
+    <div className="relative mx-auto w-full max-w-sm lg:max-w-md">
+      <div className="pointer-events-none absolute -inset-3 rounded-[2.15rem] border border-foreground/12" />
+      <div className="relative aspect-[4/5] overflow-hidden rounded-[1.75rem] bg-[#111] ring-1 ring-foreground/15">
+        {!imgError ? (
+          <Image
+            src="/erick.png"
+            alt="Portrait of Erick Koine"
+            fill
+            sizes="(min-width: 1024px) 28rem, 22rem"
+            className="object-cover object-[center_18%]"
+            priority
+            onError={() => setImgError(true)}
+          />
+        ) : (
+          <div className="absolute inset-0 grid place-items-center">
+            <span className="font-display text-7xl font-bold tracking-tight text-white/20">EK</span>
+          </div>
+        )}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
+        <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-3">
+          <span className="rounded-full bg-background/90 px-3 py-1.5 text-xs font-medium text-foreground backdrop-blur">
+            <NairobiTime />
+          </span>
+          <span className="rounded-full bg-[color:var(--accent)] px-3 py-1.5 text-xs font-medium text-white">
+            Open to work
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function Hero() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+  const portraitY = useTransform(scrollYProgress, [0, 1], [0, 40]);
+
+  return (
+    <section ref={sectionRef} id="home" className="relative overflow-hidden">
       <div
+        aria-hidden
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(100% 60% at 50% 40%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0.65) 100%)",
+            "radial-gradient(80% 50% at 10% 0%, color-mix(in oklab, var(--accent) 16%, transparent), transparent 60%), radial-gradient(60% 40% at 100% 10%, color-mix(in oklab, var(--brand-blue) 12%, transparent), transparent 55%)",
         }}
       />
-    </>
-  );
-}
-
-// --------------------
-// Watermark EMK + glyphs
-// --------------------
-function WatermarkEMK() {
-  return (
-    <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-      <div className="absolute inset-0 flex items-center justify-center">
-        <span className="select-none font-extrabold tracking-tighter text-foreground/10 text-[22vw] leading-none">
-          EMK
-        </span>
-      </div>
-      {/* Decorative glyphs */}
-      <motion.span
+      <div
         aria-hidden
-        className="absolute top-24 left-6 text-white/10 text-7xl"
-        animate={{ rotate: [0, 10, 0], y: [0, -10, 0] }}
-        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        className="pointer-events-none absolute -right-8 top-24 hidden select-none font-display text-[18vw] font-bold leading-none tracking-tighter text-foreground/[0.045] md:block"
       >
-        {"{"}
-      </motion.span>
-      <motion.span
-        aria-hidden
-        className="absolute top-32 right-16 text-white/10 text-6xl"
-        animate={{ rotate: [0, -10, 0], y: [0, 12, 0] }}
-        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-      >
-        #
-      </motion.span>
-    </div>
-  );
-}
-
-// --------------------
-// Portrait Panel
-// --------------------
-function HeroPortrait() {
-  const [imgError, setImgError] = useState(false);
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, delay: 0.2 }}
-      className="relative w-[18rem] h-[24rem] md:w-[22rem] md:h-[28rem] lg:w-[28rem] lg:h-[34rem] rounded-2xl overflow-hidden ring-1 ring-white/10 bg-white/5 backdrop-blur-sm shadow-xl"
-    >
-      {/* Brand gradient backdrop (shows even if image is missing) */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[color:var(--brand-blue)]/20 via-transparent to-[color:var(--brand-green)]/20" />
-
-      {/* Portrait */}
-      {!imgError && (
-        <Image
-          src="/erick.png"
-          alt="Portrait of Erick Koine"
-          fill
-          sizes="(min-width: 1024px) 28rem, 22rem"
-          className="object-cover grayscale hover:grayscale-0 saturate-100 transition-[filter,transform] duration-700 ease-out"
-          priority
-          onError={() => setImgError(true)}
-        />
-      )}
-
-      {/* Fallback initials when image missing */}
-      {imgError && (
-        <div className="absolute inset-0 grid place-items-center">
-          <span className="text-6xl md:text-7xl font-extrabold text-foreground/20">EK</span>
-        </div>
-      )}
-
-      {/* Subtle top vignette */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
-    </motion.div>
-  );
-}
-
-// --------------------
-// Floating Elements Component
-// --------------------
-function FloatingElements() {
-  return (
-    <>
-      {/* Floating geometric shapes */}
-      <motion.div
-        className="absolute top-20 right-20 w-4 h-4 bg-blue-500/20 rounded-full"
-        animate={{
-          y: [0, -20, 0],
-          opacity: [0.3, 0.8, 0.3]
-        }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-      />
-
-      <motion.div
-        className="absolute top-1/3 left-10 w-2 h-2 bg-green-400/30 rounded-full"
-        animate={{
-          y: [0, 15, 0],
-          x: [0, 10, 0]
-        }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-      />
-
-      <motion.div
-        className="absolute bottom-1/4 right-1/4 w-3 h-3 border border-orange-400/20 rounded-full"
-        animate={{
-          rotate: [0, 360],
-          scale: [1, 1.2, 1]
-        }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-      />
-
-      {/* Subtle grid pattern */}
-      <div className="absolute inset-0 opacity-[0.02]">
-        <div
-          className="w-full h-full"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px)
-            `,
-            backgroundSize: '50px 50px'
-          }}
-        />
+        EMK
       </div>
-    </>
-  );
-}
 
-// --------------------
-// Subtle mouse-parallax background icons
-// --------------------
-function MouseParallaxIcons() {
-  const items = [
-    { Comp: Code2, style: { top: "10%", left: "8%" }, color: "var(--brand-blue)" },
-    { Comp: PenTool, style: { top: "18%", right: "10%" }, color: "var(--brand-orange)" },
-    { Comp: Palette, style: { bottom: "18%", left: "12%" }, color: "var(--brand-green)" },
-    { Comp: TerminalSquare, style: { bottom: "12%", right: "15%" }, color: "var(--brand-red)" },
-  ];
-
-  return (
-    <div className="pointer-events-none absolute inset-0 -z-10">
-      {items.map((it, idx) => {
-        const Icon = it.Comp as any;
-        return (
-          <Icon
-            key={idx}
-            className="absolute w-12 h-12 opacity-[0.06] dark:opacity-[0.08]"
-            style={{
-              ...it.style,
-              // small translate based on mouse position (set on section as CSS vars)
-              transform:
-                "translate3d(calc((var(--mx,50vw) - 50vw) * 0.02), calc((var(--my,50vh) - 50vh) * 0.02), 0)",
-              color: it.color,
-              filter: "blur(0.3px)",
-            }}
-            aria-hidden
-          />
-        );
-      })}
-    </div>
-  );
-}
-
-
-// --------------------
-// Code Terminal Component
-// --------------------
-function CodeTerminal() {
-  const [currentLine, setCurrentLine] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentLine((prev) => (prev + 1) % (codeLines.length + 1));
-    }, 2000);
-    return () => clearInterval(timer);
-  }, []);
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, x: 50 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.8, delay: 0.5 }}
-      className="relative"
-    >
-      {/* Terminal Window */}
-      <div className="bg-black/60 backdrop-blur-sm border border-white/10 rounded-lg p-6 font-mono text-xs sm:text-sm max-w-lg">
-        {/* Terminal Header */}
-        <div className="flex items-center gap-2 mb-4 pb-3 border-b border-gray-700/50">
-          <div className="flex gap-1.5">
-            <div className="w-3 h-3 rounded-full bg-red-500/70"></div>
-            <div className="w-3 h-3 rounded-full bg-yellow-500/70"></div>
-            <div className="w-3 h-3 rounded-full bg-green-500/70"></div>
-          </div>
-          <span className="text-xs text-white/70 ml-2">erick-koine.dev</span>
-        </div>
-
-        {/* Code Content */}
-        <div className="space-y-1">
-          {codeLines.map((line, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0 }}
-              animate={{
-                opacity: index <= currentLine ? 1 : 0.3,
-                color: index <= currentLine ? "#10b981" : "#6b7280"
-              }}
-              transition={{ duration: 0.3 }}
-              className="text-[color:var(--brand-green)]"
-            >
-              {line}
-            </motion.div>
-          ))}
-
-          {/* Blinking Cursor */}
+      <div className="container relative grid min-h-[calc(100dvh-8rem)] items-center gap-10 py-10 md:grid-cols-[1.05fr_0.95fr] md:gap-12 lg:gap-16 lg:py-16">
+        <div className="max-w-2xl">
           <motion.div
-            className="inline-block w-2 h-4 bg-[color:var(--brand-green)] ml-1"
-            animate={{ opacity: [1, 0, 1] }}
-            transition={{ duration: 1, repeat: Infinity }}
-          />
-        </div>
-      </div>
-    </motion.div>
-  );
-}
-
-// --------------------
-// Hero Component
-// --------------------
-function HeroSection() {
-  const [mounted, setMounted] = useState(false);
-  const [typedIndex, setTypedIndex] = useState(0);
-
-  // rotate words
-  useEffect(() => setMounted(true), []);
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTypedIndex((prev) => (prev + 1) % typedWords.length);
-    }, 1800);
-    return () => clearInterval(interval);
-  }, []);
-
-  // subtle parallax
-  const { scrollYProgress } = useScroll();
-  const portraitY = useTransform(scrollYProgress, [0, 1], [0, -20]);
-  const terminalY = useTransform(scrollYProgress, [0, 1], [0, 15]);
-
-  // mouse-follow light
-  const sectionRef = useRef<HTMLElement | null>(null);
-  const onMouseMove = (e: React.MouseEvent) => {
-    const el = sectionRef.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    el.style.setProperty("--mx", `${x}px`);
-    el.style.setProperty("--my", `${y}px`);
-  };
-
-  if (!mounted) return null;
-
-  return (
-    <section
-      ref={sectionRef as any}
-      onMouseMove={onMouseMove}
-      id="home"
-      className="min-h-dvh bg-background text-foreground relative overflow-hidden"
-    >
-
-      {/* Background FX layers */}
-      <BackgroundFX />
-      <WatermarkEMK />
-      <FloatingElements />
-
-      <div className="hidden sm:block"><MouseParallaxIcons /></div>
-      {/* Main Content Container */}
-      <div className="container px-4 sm:px-6 lg:px-8 min-h-[calc(100dvh-5rem)] flex items-center justify-center z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center w-full">
-
-          {/* Left Side - Main Content */}
-          <div className="space-y-6 md:space-y-8 text-left">
-            {/* Name Heading (left-aligned) */}
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7 }}
-              className="text-3xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[0.9]"
-            >
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="mb-5 flex items-center gap-3"
+          >
+            <div className="relative h-11 w-11 overflow-hidden rounded-full bg-[#111] ring-1 ring-foreground/15 md:hidden">
+              <Image
+                src="/erick.png"
+                alt=""
+                fill
+                sizes="44px"
+                className="object-cover object-top"
+              />
+            </div>
+            <p className="text-[11px] font-medium uppercase tracking-[0.28em] text-foreground/55">
               Erick Koine
-            </motion.h1>
+            </p>
+          </motion.div>
 
-            {/* Small Label */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="flex items-center gap-3 justify-start"
-            >
-              <div className="w-8 h-px bg-[color:var(--brand-orange)]"></div>
-              <span className="text-[color:var(--brand-orange)] text-xs sm:text-sm font-medium tracking-wider uppercase">
-                Full-Stack Developer with Business Acumen & Creative Edge
+          <motion.h1
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.05 }}
+            className="font-display text-[2.65rem] font-semibold leading-[0.95] tracking-tight text-foreground sm:text-6xl lg:text-[4.6rem]"
+          >
+            I build technology
+            <span className="mt-1 block text-[color:var(--muted-foreground)]">
+              that moves businesses forward.
+            </span>
+          </motion.h1>
+
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.15 }}
+            className="mt-6 flex gap-2 overflow-x-auto no-scrollbar sm:flex-wrap"
+          >
+            {roles.map((role) => (
+              <span
+                key={role}
+                className="shrink-0 rounded-full border border-foreground/15 bg-background/40 px-3.5 py-1.5 text-xs font-medium text-foreground/80"
+              >
+                {role}
               </span>
-            </motion.div>
+            ))}
+          </motion.div>
 
-            {/* Main Heading */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.1 }}
-              className="space-y-6"
-            >
-              <div className="h-auto">
-                <AnimatePresence mode="wait">
-                  <motion.h1
-                    key={typedIndex}
-                    initial={{ y: 40, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    exit={{ y: -40, opacity: 0 }}
-                    transition={{ duration: 0.5 }}
-                    className="text-4xl md:text-7xl lg:text-8xl font-extrabold leading-tight tracking-tight"
-                  >
-                    <span className="bg-gradient-to-r from-[color:var(--brand-green)] to-[color:var(--brand-blue)] bg-clip-text text-transparent">
-                      {typedWords[typedIndex]}
-                    </span>
-                    <motion.span
-                      aria-hidden
-                      className="inline-block w-2 h-10 align-middle bg-[color:var(--brand-green)] ml-2"
-                      animate={{ opacity: [1, 0, 1] }}
-                      transition={{ duration: 1, repeat: Infinity }}
-                    />
-                  </motion.h1>
-                </AnimatePresence>
-              </div>
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="mt-6 max-w-xl text-base leading-relaxed text-[color:var(--muted-foreground)] sm:text-lg"
+          >
+            Software, infrastructure and creative problem-solving — built around real business outcomes.
+          </motion.p>
 
-              {/* Roles */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="flex flex-wrap gap-2 justify-start"
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.28 }}
+            className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
+          >
+            <Magnetic strength={0.18} className="w-full sm:w-auto">
+              <Link
+                href="#work"
+                className="inline-flex h-12 min-h-12 w-full items-center justify-center rounded-full bg-foreground px-7 text-[15px] font-medium text-background transition-opacity hover:opacity-90 sm:w-auto"
               >
-                {roles.map((r, i) => (
-                  <Badge
-                    key={r}
-                    variant="outline"
-                    className={`${["text-[color:var(--brand-blue)] border-[color:var(--brand-blue)]/40 bg-[color:var(--brand-blue)]/5","text-[color:var(--brand-green)] border-[color:var(--brand-green)]/40 bg-[color:var(--brand-green)]/5","text-[color:var(--brand-orange)] border-[color:var(--brand-orange)]/40 bg-[color:var(--brand-orange)]/5","text-[color:var(--brand-red)] border-[color:var(--brand-red)]/40 bg-[color:var(--brand-red)]/5"][i % 4]}`}
-                  >
-                    {r}
-                  </Badge>
-                ))}
-              </motion.div>
-
-              {/* Subheadline */}
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                className="text-base sm:text-lg lg:text-2xl text-foreground/80 leading-relaxed max-w-2xl"
-              >
-
-                I bring insight into key business issues, the technical skill to engineer solutions, and the confidence to act—refined through 7+ years of solving real problems.
-              </motion.p>
-            </motion.div>
-
-            {/* Description */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="text-base sm:text-lg lg:text-xl text-gray-300 leading-relaxed max-w-prose"
+                View selected work
+              </Link>
+            </Magnetic>
+            <Link
+              href="#contact"
+              className="inline-flex h-12 min-h-12 items-center justify-center gap-1.5 rounded-full border border-foreground/18 bg-background/50 px-7 text-[15px] font-medium text-foreground transition-colors hover:border-foreground/40"
             >
-              Backend, frontend, and infrastructure — delivering technology that accelerates business outcomes
-            </motion.p>
+              Let&apos;s talk
+              <ArrowUpRight className="h-4 w-4" />
+            </Link>
+          </motion.div>
+        </div>
 
-            {/* Action Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4 justify-start"
-            >
-              <Button
-                asChild
-                size="lg"
-                className="bg-white text-gray-950 hover:bg-gray-100 px-6 py-4 text-sm sm:px-8 sm:py-6 sm:text-base font-medium rounded-none transition-all duration-300"
-              >
-                <Link href="#work" aria-label="See my work">See My Work</Link>
-              </Button>
+        <motion.div style={{ y: portraitY }} className="hidden justify-self-end md:block">
+          <HeroPortrait />
+        </motion.div>
+      </div>
 
-              <Button
-                asChild
-                variant="outline"
-                size="lg"
-                className="border-2 border-[color:var(--brand-green)] text-[color:var(--brand-green)] hover:bg-[color:var(--brand-green)] hover:text-gray-950 px-6 py-4 text-sm sm:px-8 sm:py-6 sm:text-base font-medium rounded-none transition-all duration-300"
-              >
-                <Link href="#contact" aria-label="Get in touch">Get in Touch</Link>
-              </Button>
-            </motion.div>
-
-            {/* Social proof strip */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="pt-2"
-            >
-              <div className="flex flex-wrap items-center justify-start gap-x-6 gap-y-2 text-xs sm:text-sm text-foreground/60">
-                <span className="uppercase tracking-wider text-foreground/40">Trusted by</span>
-                <span className="opacity-80">Dry Associates</span>
-                <span className="opacity-80">Cerny Bureau</span>
-                <span className="opacity-80">Crypsense</span>
-                <span className="opacity-80">Salma Samu</span>
-              </div>
-            </motion.div>
-
-          </div>
-
-          {/* Right Side - Portrait + Code Terminal overlay */}
-          <div className="relative flex justify-center lg:justify-end">
-            <motion.div style={{ y: portraitY }} className="max-w-full">
-              <HeroPortrait />
-            </motion.div>
-            <motion.div className="static mt-4 sm:absolute sm:bottom-2 sm:right-2 lg:-bottom-24 lg:-right-16 z-10 max-w-[90vw]" style={{ y: terminalY }}>
-              <CodeTerminal />
-            </motion.div>
+      <div className="relative border-t border-foreground/10">
+        <div className="overflow-hidden py-4">
+          <div className="animate-marquee flex w-max gap-10 pr-10 text-sm text-foreground/50">
+            {[...stack, ...stack].map((item, i) => (
+              <span key={`${item}-${i}`} className="shrink-0 tracking-wide">
+                {item}
+                <span className="ml-10 text-foreground/25">/</span>
+              </span>
+            ))}
           </div>
         </div>
       </div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-gray-400/70 flex flex-col items-center gap-2"
-      >
-        <span className="text-xs tracking-widest uppercase">Scroll</span>
-        <div className="w-px h-8 bg-gradient-to-b from-green-400/60 to-transparent" />
-      </motion.div>
     </section>
   );
-}
-
-// --------------------
-// Main Hero Component
-// --------------------
-export function Hero() {
-  return <HeroSection />;
 }

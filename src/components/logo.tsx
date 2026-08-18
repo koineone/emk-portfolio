@@ -2,12 +2,12 @@
 
 import Image from "next/image";
 import { motion, useCycle } from "framer-motion";
+import { cn } from "@/lib/utils";
 
-// Uses the full-color logo by default.
 export function Logo({ height = 40, className = "" }: { height?: number; className?: string }) {
   const [spin, toggle] = useCycle(false, true);
 
-  const ratio = 444 / 210.89; // from SVG viewBox
+  const ratio = 444 / 210.89;
   const width = Math.round(height * ratio);
 
   return (
@@ -15,7 +15,7 @@ export function Logo({ height = 40, className = "" }: { height?: number; classNa
       whileTap={{ scale: 0.97 }}
       onClick={() => toggle()}
       aria-label="Erick Koine Logo"
-      className={`inline-flex items-center leading-none ${className}`}
+      className={cn("inline-flex items-center leading-none", className)}
     >
       <motion.span
         animate={spin ? { rotate: 360 } : { rotate: 0 }}
@@ -29,7 +29,7 @@ export function Logo({ height = 40, className = "" }: { height?: number; classNa
           alt="EMK logo"
           width={width}
           height={height}
-          className="block select-none"
+          className="block h-full w-auto select-none"
           draggable={false}
           priority
         />
@@ -37,4 +37,3 @@ export function Logo({ height = 40, className = "" }: { height?: number; classNa
     </motion.span>
   );
 }
-

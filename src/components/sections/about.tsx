@@ -1,260 +1,105 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { MapPin, ArrowRight } from "lucide-react";
+import { Reveal, SectionHeading } from "@/components/reveal";
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.1
-    }
-  }
-};
+const stats = [
+  { value: "7+", label: "Years experience" },
+  { value: "15+", label: "Projects delivered" },
+  { value: "3", label: "Core disciplines" },
+  { value: "NBO", label: "Based in Nairobi" },
+];
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: [0.25, 0.1, 0.25, 1] as const
-    }
-  }
-};
-
-const timelineVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.3,
-      delayChildren: 0.2
-    }
-  }
-};
-
-const timelineItemVariants = {
-  hidden: { opacity: 0, x: -20 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.6,
-      ease: "easeOut"
-    }
-  }
-};
+const timeline = [
+  {
+    title: "IT Support",
+    body: "Networking, hardware and the unglamorous work of keeping people productive.",
+  },
+  {
+    title: "Systems",
+    body: "Internal platforms that replaced slow, manual processes — including the Dry Associates operations system.",
+  },
+  {
+    title: "Development",
+    body: "Web products, brand systems and digital experiences for clients through Bush Bristles.",
+  },
+  {
+    title: "Strategy",
+    body: "The work now sits where software, infrastructure and business decisions meet.",
+  },
+];
 
 export function AboutSection() {
-  const ref = useRef(null);
-  const timelineRef = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const timelineInView = useInView(timelineRef, { once: true, margin: "-50px" });
-
   return (
-    <section id="about" className="relative py-32 overflow-hidden" ref={ref}>
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[color:var(--brand-orange)]/3 via-transparent to-[color:var(--brand-red)]/3" />
-
-      <div className="container relative z-10">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-20"
-        >
-          <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
-            Beyond the Code
-          </h2>
-          <p className="text-xl text-foreground/70 max-w-3xl mx-auto">
-            Where technology meets creativity, and problems become opportunities for innovation.
-          </p>
-        </motion.div>
-
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="grid gap-16 lg:grid-cols-[1fr_1px_1fr] max-w-7xl mx-auto"
-        >
-        {/* Left: Confident Intro */}
-        <motion.div variants={itemVariants} className="space-y-8">
-          <motion.div variants={itemVariants}>
-            <h3 className="text-2xl md:text-3xl font-bold tracking-tight mb-6">
-              Who I Am
-            </h3>
-            <p className="text-lg text-foreground/80 leading-relaxed mb-6">
-              I&apos;m Erick Koine, a developer and designer hybrid who thrives at the intersection of technology and creativity.
-              With over 7 years of experience across finance, consulting, and education sectors, I don&apos;t just build solutions —
-              I craft experiences that make a difference.
-            </p>
-            <p className="text-lg text-foreground/80 leading-relaxed">
-              From solving everyday IT challenges to designing systems that save time and money, I&apos;ve learned that the best
-              technology is invisible — it just works, beautifully and efficiently.
-            </p>
-          </motion.div>
-
-          {/* Modern Stats Cards */}
-          <motion.div
-            variants={itemVariants}
-            className="grid gap-6 sm:grid-cols-2"
-          >
-            <motion.div
-              whileHover={{ scale: 1.02, y: -5 }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="group"
-            >
-              <Card className="border-[color:var(--brand-blue)]/20 hover:border-[color:var(--brand-blue)]/40 transition-all duration-300 hover:shadow-lg">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-[color:var(--brand-blue)]/10 flex items-center justify-center">
-                      <span className="text-[color:var(--brand-blue)] text-lg">⚡</span>
-                    </div>
-                    Quick Facts
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-3 text-sm text-foreground/80">
-                  <div className="flex items-center gap-3">
-                    <span className="text-[color:var(--brand-green)]">📍</span>
-                    <span>Nairobi, Kenya</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <span className="text-[color:var(--brand-orange)]">💼</span>
-                    <span>7+ years in ICT & Development</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <span className="text-[color:var(--brand-blue)]">🏢</span>
-                    <span>Banking, consulting, academia</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <span className="text-[color:var(--brand-red)]">🎨</span>
-                    <span>Founder of Bush Bristles</span>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-
-            <motion.div
-              whileHover={{ scale: 1.02, y: -5 }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="group"
-            >
-              <Card className="border-[color:var(--brand-green)]/20 hover:border-[color:var(--brand-green)]/40 transition-all duration-300 hover:shadow-lg">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-[color:var(--brand-green)]/10 flex items-center justify-center">
-                      <span className="text-[color:var(--brand-green)] text-lg">🎯</span>
-                    </div>
-                    What I Do
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="text-sm text-foreground/80 space-y-3">
-                  <div className="flex items-start gap-2">
-                    <span className="text-[color:var(--brand-blue)] mt-1">•</span>
-                    <span>Systems that save time and money</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <span className="text-[color:var(--brand-green)] mt-1">•</span>
-                    <span>Experiences that build trust</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <span className="text-[color:var(--brand-orange)] mt-1">•</span>
-                    <span>Products that stand out</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <span className="text-[color:var(--brand-red)] mt-1">•</span>
-                    <span>Technology that truly wins</span>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </motion.div>
-        </motion.div>
-
-        {/* Divider */}
-        <motion.div
-          variants={itemVariants}
-          className="hidden lg:block bg-gradient-to-b from-[color:var(--brand-blue)] via-[color:var(--brand-green)] to-[color:var(--brand-orange)] w-px opacity-30"
+    <section id="about" className="relative py-20 sm:py-24 lg:py-32">
+      <div className="container">
+        <SectionHeading
+          eyebrow="About"
+          title="Beyond the code."
+          description="Seven years turning business problems into systems that actually get used."
         />
 
-        {/* Right: Journey Timeline */}
-        <motion.div
-          ref={timelineRef}
-          variants={timelineVariants}
-          initial="hidden"
-          animate={timelineInView ? "visible" : "hidden"}
-          className="space-y-8"
-        >
-          <motion.div variants={timelineItemVariants}>
-            <h3 className="text-2xl md:text-3xl font-bold tracking-tight mb-4">
-              My Journey
-            </h3>
-            <p className="text-lg text-foreground/70 mb-2">
-              From IT Support → to Systems → to Strategy
-            </p>
-            <p className="text-foreground/60 mb-8">
-              I started by solving everyday IT challenges — networking, hardware, and user support. But I didn&apos;t stop there.
-            </p>
-          </motion.div>
+        <div className="mt-12 grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
+          <div>
+            <Reveal>
+              <p className="text-base leading-relaxed text-foreground/70 sm:text-lg">
+                I&apos;m Erick Koine — a developer and designer who came up through ICT, not a bootcamp
+                slide deck. I started by fixing the things that break. I stayed because the interesting
+                problems were always one layer above the ticket.
+              </p>
+            </Reveal>
+            <Reveal delay={0.08} className="mt-5">
+              <p className="text-base leading-relaxed text-foreground/70 sm:text-lg">
+                By day I work on software and infrastructure. Beyond that I run{" "}
+                <span className="text-foreground">Bush Bristles</span> — a creative technology studio
+                helping businesses with branding, websites and digital systems.
+              </p>
+            </Reveal>
 
-          {/* Journey Story Cards */}
-          <motion.div
-            variants={timelineVariants}
-            className="space-y-6"
-          >
-            <motion.div
-              variants={timelineItemVariants}
-              className="group"
-            >
-              <Card className="border-[color:var(--brand-green)]/20 hover:border-[color:var(--brand-green)]/40 transition-all duration-300 hover:shadow-lg">
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-full bg-[color:var(--brand-green)]/10 flex items-center justify-center flex-shrink-0">
-                      <span className="text-[color:var(--brand-green)] text-xl">🚀</span>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-[color:var(--brand-green)] mb-2">Building Systems</h4>
-                      <p className="text-foreground/70 text-sm leading-relaxed">
-                        I grew into building systems that save time and money (Dry Associates in-house system),
-                        designing experiences that build trust (Cerny Bureau Enterprises), and branding products
-                        that stand out (Crypsense, Salma Samu).
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
+            <Reveal delay={0.12} className="mt-8 flex items-center gap-2 text-sm text-foreground/55">
+              <MapPin className="h-4 w-4 text-[color:var(--accent)]" />
+              Nairobi, Kenya
+            </Reveal>
+          </div>
 
-            <motion.div
-              variants={timelineItemVariants}
-              className="group"
-            >
-              <Card className="border-[color:var(--brand-blue)]/20 hover:border-[color:var(--brand-blue)]/40 transition-all duration-300 hover:shadow-lg">
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-full bg-[color:var(--brand-blue)]/10 flex items-center justify-center flex-shrink-0">
-                      <span className="text-[color:var(--brand-blue)] text-xl">🎯</span>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-[color:var(--brand-blue)] mb-2">Strategic Impact</h4>
-                      <p className="text-foreground/70 text-sm leading-relaxed">
-                        Today, I work at the intersection of development, design, and business impact — helping
-                        companies go beyond "just working" to truly winning with technology.
-                      </p>
-                    </div>
+          <Reveal delay={0.1}>
+            <div className="grid grid-cols-2 gap-px overflow-hidden rounded-[1.5rem] border border-foreground/10 bg-foreground/10">
+              {stats.map((s) => (
+                <div key={s.label} className="bg-background p-5 sm:p-6">
+                  <div className="font-display text-3xl font-semibold tracking-tight sm:text-4xl">
+                    {s.value}
                   </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </motion.div>
-        </motion.div>
-      </motion.div>
+                  <div className="mt-1 text-xs uppercase tracking-[0.14em] text-foreground/45">
+                    {s.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+
+        <Reveal delay={0.15} className="mt-16">
+          <p className="mb-8 text-[11px] font-medium uppercase tracking-[0.22em] text-foreground/40">
+            The path
+          </p>
+          <ol className="grid gap-0 sm:grid-cols-2 lg:grid-cols-4">
+            {timeline.map((step, i) => (
+              <li
+                key={step.title}
+                className="relative border-t border-foreground/10 py-6 sm:border-t-0 sm:border-l sm:px-6 sm:first:border-l-0 sm:first:pl-0"
+              >
+                <div className="mb-3 flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.18em] text-[color:var(--accent)]">
+                  {String(i + 1).padStart(2, "0")}
+                  {i < timeline.length - 1 && (
+                    <ArrowRight className="hidden h-3 w-3 text-foreground/25 lg:inline" />
+                  )}
+                </div>
+                <h3 className="font-display text-xl font-semibold tracking-tight">{step.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-foreground/60">{step.body}</p>
+              </li>
+            ))}
+          </ol>
+        </Reveal>
       </div>
     </section>
   );

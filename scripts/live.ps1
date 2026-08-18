@@ -33,7 +33,15 @@ if ($LASTEXITCODE -ne 0) {
 git push origin main
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
+Write-Host "Deploying to Vercel production..."
+npx vercel --prod --yes
+if ($LASTEXITCODE -ne 0) {
+  Write-Host "GitHub is updated, but Vercel deploy needs you to run: npx vercel login"
+  git checkout development
+  exit $LASTEXITCODE
+}
+
 git checkout development
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
-Write-Host "Live is updated. You are back on development."
+Write-Host "Live is updated on GitHub and Vercel. You are back on development."

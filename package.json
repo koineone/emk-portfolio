@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "save": "powershell -ExecutionPolicy Bypass -File scripts/save.ps1",
-    "live": "powershell -ExecutionPolicy Bypass -File scripts/live.ps1"
+    "live": "powershell -ExecutionPolicy Bypass -File scripts/live.ps1",
+    "deploy": "npx vercel --prod --yes"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.1",
@@ -31,7 +32,7 @@
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "^12.23.12",
     "lucide-react": "^0.540.0",
-    "next": "15.5.0",
+    "next": "^15.5.21",
     "next-themes": "^0.4.6",
     "react": "19.1.0",
     "react-dom": "19.1.0",
@@ -48,7 +49,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "15.5.0",
+    "eslint-config-next": "^15.5.21",
     "eslint-config-prettier": "^10.1.8",
     "prettier": "^3.6.2",
     "tailwindcss": "^4",
